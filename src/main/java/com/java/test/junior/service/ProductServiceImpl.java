@@ -4,6 +4,7 @@
 
 package com.java.test.junior.service;
 
+import com.java.test.junior.exception.ProductNotExistsException;
 import com.java.test.junior.mapper.ProductMapper;
 import com.java.test.junior.model.Product;
 import lombok.RequiredArgsConstructor;
@@ -48,12 +49,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProductById(Long id) {
-        productMapper.deleteProductById(id);
-    }
+        Product existingProduct = productMapper.findById(id);
 
-    static class ProductNotExistsException extends RuntimeException {
-        public ProductNotExistsException(String message) {
-            super(message);
+        if (isNull(existingProduct)) {
+            throw new ProductNotExistsException("Unknown product with id: " + id);
         }
+
+        productMapper.deleteProductById(id);
     }
 }

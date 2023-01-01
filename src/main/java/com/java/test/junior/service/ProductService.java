@@ -13,7 +13,7 @@ import com.java.test.junior.model.Product;
  */
 public interface ProductService {
     /**
-     * @param Product this product to be created
+     * @param product this product to be created
      */
     Product createProduct(Product product);
 

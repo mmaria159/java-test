@@ -11,8 +11,6 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-import static java.time.LocalDateTime.now;
-
 /**
  * @author dumitru.beselea
  * @version java-test-junior
@@ -36,6 +34,5 @@ public class Product {
         this.price = price;
         this.description = description;
         this.userId = userId;
-        this.createdAt = now();
     }
 }
