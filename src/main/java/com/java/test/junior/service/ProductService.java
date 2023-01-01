@@ -5,7 +5,6 @@
 package com.java.test.junior.service;
 
 import com.java.test.junior.model.Product;
-import com.java.test.junior.model.ProductDTO;
 
 /**
  * @author dumitru.beselea
@@ -14,7 +13,7 @@ import com.java.test.junior.model.ProductDTO;
  */
 public interface ProductService {
     /**
-     * @param productDTO this product to be created
+     * @param Product this product to be created
      */
     Product createProduct(Product product);
 
@@ -22,6 +21,5 @@ public interface ProductService {
 
     void deleteProductById(Long id);
 
-    void updateProductById(Long id);
-
+    void updateProductById(Product product);
 }

@@ -28,9 +28,9 @@ public interface ProductMapper {
     @Options(flushCache = TRUE)
     Product save(Product product);
 
-    @Update("Update product set name=#{name}, price=#{price}, description=#{description}, user_id=#{userId} where id=#{id}")
-    void update(Long id);
+    @Update("UPDATE product SET name = #{name}, price = #{price}, description = #{description}, user_id = #{userId} WHERE id = #{id}")
+    void update(Product product);
 
-    @Delete("Delete from product where id=#{id}")
+    @Delete("DELETE FROM product WHERE id = #{id}")
     void deleteProductById(Long id);
 }

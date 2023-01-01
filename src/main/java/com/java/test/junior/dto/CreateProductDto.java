@@ -2,8 +2,9 @@
  * Copyright (c) 2013-2022 Global Database Ltd, All rights reserved.
  */
 
-package com.java.test.junior.model;
+package com.java.test.junior.dto;
 
+import com.java.test.junior.model.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,13 +15,13 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ProductDTO {
+public class CreateProductDto {
     private String name;
     private Double price;
     private String description;
     private Long userId;
 
-    public Product toProduct(){
+    public Product toProduct() {
         return new Product(
                 name,
                 price,

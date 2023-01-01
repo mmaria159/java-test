@@ -6,9 +6,10 @@ package com.java.test.junior.service;
 
 import com.java.test.junior.mapper.ProductMapper;
 import com.java.test.junior.model.Product;
-import com.java.test.junior.model.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static java.util.Objects.isNull;
 
 /**
  * @author dumitru.beselea
@@ -35,13 +36,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProductById(Long id) {
-        Product product =  productMapper.findById(id);
-        productMapper.update(product.getId());
+    public void updateProductById(Product product) {
+        Product existingProduct = productMapper.findById(product.getId());
+
+        if (isNull(existingProduct)) {
+            throw new ProductNotExistsException("Unknown product with id: " + product.getId());
+        }
+
+        productMapper.update(product);
     }
 
     @Override
     public void deleteProductById(Long id) {
         productMapper.deleteProductById(id);
+    }
+
+    static class ProductNotExistsException extends RuntimeException {
+        public ProductNotExistsException(String message) {
+            super(message);
+        }
     }
 }
