@@ -8,22 +8,23 @@ import com.java.test.junior.model.Product;
 import com.java.test.junior.model.ProductDTO;
 import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 /**
  * @author dumitru.beselea
  * @version java-test-junior
  * @apiNote 08.12.2022
  */
-@RequestMapping("/products")
 @RestController
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(CREATED)
     public int createProduct(@RequestBody ProductDTO productDTO) {
         return productService.createProduct(productDTO);
     }

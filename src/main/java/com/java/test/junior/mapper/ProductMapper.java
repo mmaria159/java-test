@@ -5,7 +5,6 @@
 package com.java.test.junior.mapper;
 
 import com.java.test.junior.model.Product;
-import com.java.test.junior.model.ProductDTO;
 import org.apache.ibatis.annotations.*;
 
 /**
@@ -20,7 +19,7 @@ public interface ProductMapper {
 
     @Insert("Insert into product(name,price,description,user_id) values (#{name},#{price},#{description},#{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int save(ProductDTO productDTO);
+    int save(Product product);
 
     @Update("Update product set name=#{name}, price=#{price}, description=#{description}, user_id=#{userId} where id=#{id}")
     void update(Long id);

@@ -11,6 +11,8 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
+import static java.time.LocalDateTime.now;
+
 /**
  * @author dumitru.beselea
  * @version java-test-junior
@@ -28,4 +30,12 @@ public class Product {
     private Long userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public Product(String name, Double price, String description, Long userId) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.userId = userId;
+        this.createdAt = now();
+    }
 }

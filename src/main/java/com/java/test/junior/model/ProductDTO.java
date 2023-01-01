@@ -15,9 +15,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductDTO {
-    private Long id;
     private String name;
     private Double price;
     private String description;
     private Long userId;
+
+    public Product toProduct(){
+        return new Product(
+                name,
+                price,
+                description,
+                userId
+        );
+    }
 }
