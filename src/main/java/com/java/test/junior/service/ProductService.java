@@ -15,7 +15,13 @@ import com.java.test.junior.model.ProductDTO;
 public interface ProductService {
     /**
      * @param productDTO this product to be created
-     * @return the product created from the database
      */
-    Product createProduct(ProductDTO productDTO);
+    int createProduct(ProductDTO productDTO);
+
+    Product findProductById(Long id);
+
+    void deleteProductById(Long id);
+
+    void updateProductById(Long id);
+
 }

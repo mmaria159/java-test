@@ -9,25 +9,37 @@ import com.java.test.junior.model.ProductDTO;
 import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author dumitru.beselea
  * @version java-test-junior
  * @apiNote 08.12.2022
  */
-@RequestMapping
-@RestController("/products")
+@RequestMapping("/products")
+@RestController
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product createProduct(ProductDTO productDTO) {
+    public int createProduct(@RequestBody ProductDTO productDTO) {
         return productService.createProduct(productDTO);
+    }
+
+    @GetMapping("/{id}")
+    public Product findProductById(@PathVariable Long id) {
+        return productService.findProductById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateProductById(@PathVariable Long id){
+        productService.updateProductById(id);
     }
 }
