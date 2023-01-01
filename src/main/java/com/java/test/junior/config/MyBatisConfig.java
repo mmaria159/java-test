@@ -8,11 +8,11 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.apache.ibatis.session.Configuration;
 
 import javax.sql.DataSource;
 
-@Configuration
+@org.springframework.context.annotation.Configuration
 public class MyBatisConfig {
 
     @Value("${spring.datasource.driver-class-name}")
@@ -30,10 +30,14 @@ public class MyBatisConfig {
     }
 
     @Bean
-    public org.apache.ibatis.session.Configuration configuration() {
+    public Configuration configuration() {
         Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource());
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(environment);
+
+        Configuration configuration = new Configuration(environment);
+        configuration.setMapUnderscoreToCamelCase(true);
+
         configuration.addMapper(ProductMapper.class);
+
         return configuration;
     }
 

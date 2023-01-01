@@ -16,7 +16,7 @@ public interface ProductService {
     /**
      * @param productDTO this product to be created
      */
-    int createProduct(ProductDTO productDTO);
+    Product createProduct(Product product);
 
     Product findProductById(Long id);
 

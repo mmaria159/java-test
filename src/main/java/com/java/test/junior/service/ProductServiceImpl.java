@@ -25,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public int createProduct(ProductDTO productDTO) {
-        return productMapper.save(productDTO.toProduct());
+    public Product createProduct(Product product) {
+        return productMapper.save(product);
     }
 
     @Override
@@ -35,14 +35,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(Long id) {
-        productMapper.deleteProductById(id);
-    }
-
-    @Override
     public void updateProductById(Long id) {
         Product product =  productMapper.findById(id);
         productMapper.update(product.getId());
     }
 
+    @Override
+    public void deleteProductById(Long id) {
+        productMapper.deleteProductById(id);
+    }
 }
