@@ -38,13 +38,4 @@ public class Product {
         this.userId = userId;
         this.createdAt = now();
     }
-
-    public Product(Long id, String name, Double price, String description, Long userId) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.userId = userId;
-        this.createdAt = now();
-    }
 }

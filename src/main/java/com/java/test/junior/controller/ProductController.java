@@ -4,9 +4,8 @@
 
 package com.java.test.junior.controller;
 
-import com.java.test.junior.dto.UpdateProductDto;
+import com.java.test.junior.dto.ProductDto;
 import com.java.test.junior.model.Product;
-import com.java.test.junior.dto.CreateProductDto;
 import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +25,9 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Product createProduct(@RequestBody CreateProductDto createProductDto) {
-        return productService.createProduct(createProductDto.toProduct());
+    public Product createProduct(@RequestBody ProductDto productDto) {
+        Product product = productDto.toProduct();
+        return productService.createProduct(product);
     }
 
     @GetMapping("/{id}")
@@ -35,9 +35,11 @@ public class ProductController {
         return productService.findProductById(id);
     }
 
-    @PutMapping
-    public void updateProductById(@RequestBody UpdateProductDto updateProductDto){
-        productService.updateProductById(updateProductDto.toProduct());
+    @PutMapping("/{id}")
+    public void updateProductById(@PathVariable Long id, @RequestBody ProductDto productDto) {
+        Product product = productDto.toProduct();
+        product.setId(id);
+        productService.updateProductById(product);
     }
 
     @DeleteMapping("{id}")
