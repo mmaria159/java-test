@@ -21,4 +21,13 @@ public class ExceptionHandling {
 
         return new ResponseEntity<>(body, NOT_FOUND);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException illegalArgumentException) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", now());
+        body.put("message", illegalArgumentException.getMessage());
+
+        return new ResponseEntity<>(body, NOT_FOUND);
+    }
 }

@@ -5,6 +5,8 @@
 package com.java.test.junior.service;
 
 import com.java.test.junior.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author dumitru.beselea
@@ -22,4 +24,6 @@ public interface ProductService {
     void deleteProductById(Long id);
 
     void updateProductById(Product product);
+
+    Page<Product> findAll(Pageable pageable);
 }

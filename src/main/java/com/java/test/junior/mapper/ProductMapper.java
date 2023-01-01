@@ -7,6 +7,8 @@ package com.java.test.junior.mapper;
 import com.java.test.junior.model.Product;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 import static org.apache.ibatis.annotations.Options.FlushCachePolicy.TRUE;
 
 /**
@@ -19,9 +21,6 @@ public interface ProductMapper {
     @Select("SELECT * FROM product WHERE id = #{id}")
     Product findById(Long id);
 
-//    @Insert("Insert into product(name,price,description,user_id) values (#{name},#{price},#{description},#{userId})")
-//    @Options(useGeneratedKeys = true, keyProperty = "id")
-
     @Select("INSERT INTO product(name, price, description, user_id) " +
             "VALUES (#{name}, #{price}, #{description}, #{userId}) " +
             "RETURNING id, name, price, description, created_at, updated_at, user_id")
@@ -33,4 +32,10 @@ public interface ProductMapper {
 
     @Delete("DELETE FROM product WHERE id = #{id}")
     void deleteProductById(Long id);
+
+    @Select("SELECT * FROM product OFFSET #{offset} LIMIT #{size}")
+    List<Product> findAll(@Param("offset") int offset, @Param("size") int size);
+
+    @Select("SELECT COUNT(*) FROM product")
+    Long countAll();
 }

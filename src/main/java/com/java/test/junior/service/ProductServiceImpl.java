@@ -8,7 +8,12 @@ import com.java.test.junior.exception.ProductNotExistsException;
 import com.java.test.junior.mapper.ProductMapper;
 import com.java.test.junior.model.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static java.util.Objects.isNull;
 
@@ -45,6 +50,13 @@ public class ProductServiceImpl implements ProductService {
         }
 
         productMapper.update(product);
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        List<Product> content = productMapper.findAll(pageable.getPageNumber(), pageable.getPageSize());
+        Long total = productMapper.countAll();
+        return new PageImpl<>(content, pageable, total);
     }
 
     @Override

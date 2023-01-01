@@ -8,8 +8,12 @@ import com.java.test.junior.dto.ProductDto;
 import com.java.test.junior.model.Product;
 import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.http.HttpStatus.CREATED;
 
 /**
@@ -33,6 +37,13 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product findProductById(@PathVariable Long id) {
         return productService.findProductById(id);
+    }
+
+    @GetMapping
+    public Page<Product> findAllProducts(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "30") int size) {
+        return productService.findAll(PageRequest.of((page - 1) * size, size, Sort.by(ASC, "id")));
     }
 
     @PutMapping("/{id}")
