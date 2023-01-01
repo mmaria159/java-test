@@ -16,20 +16,29 @@ import javax.sql.DataSource;
 public class MyBatisConfig {
 
     @Value("${spring.datasource.driver-class-name}")
-    public String DRIVER;
+    private String DRIVER;
     @Value("${spring.datasource.url}")
-    public String URL;
+    private String URL;
     @Value("${spring.datasource.username}")
-    public String USERNAME;
+    private String USERNAME;
     @Value("${spring.datasource.password}")
-    public String PASSWORD;
+    private String PASSWORD;
+
+    @Bean
+    public DataSource dataSource() {
+        return new PooledDataSource(DRIVER, URL, USERNAME, PASSWORD);
+    }
+
+    @Bean
+    public org.apache.ibatis.session.Configuration configuration() {
+        Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource());
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(environment);
+        configuration.addMapper(ProductMapper.class);
+        return configuration;
+    }
 
     @Bean
     public SqlSessionFactory buildSqlSessionFactory() {
-        DataSource dataSource = new PooledDataSource(DRIVER, URL, USERNAME, PASSWORD);
-        Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource);
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(environment);
-        configuration.addMapper(ProductMapper.class);
-        return new SqlSessionFactoryBuilder().build(configuration);
+        return new SqlSessionFactoryBuilder().build(configuration());
     }
 }
