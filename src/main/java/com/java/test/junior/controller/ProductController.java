@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -37,6 +39,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product findProductById(@PathVariable Long id) {
         return productService.findProductById(id);
+    }
+
+    @GetMapping("/by-name")
+    public List<Product> findProductByName(@RequestParam("name") String name) {
+        return productService.findProductByName(name);
     }
 
     @GetMapping

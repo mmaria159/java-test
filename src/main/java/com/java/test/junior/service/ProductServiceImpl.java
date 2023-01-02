@@ -42,6 +42,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findProductByName(String name) {
+        List<Product> existingProduct = productMapper.findProductByName(name);
+
+        if (existingProduct.isEmpty()) {
+            throw new ProductNotExistsException("Unknown products with name: " + name);
+        }
+        return productMapper.findProductByName(name);
+    }
+
+    @Override
     public void updateProductById(Product product) {
         Product existingProduct = productMapper.findById(product.getId());
 

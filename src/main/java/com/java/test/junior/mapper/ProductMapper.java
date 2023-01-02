@@ -21,6 +21,9 @@ public interface ProductMapper {
     @Select("SELECT * FROM product WHERE id = #{id}")
     Product findById(Long id);
 
+    @Select("SELECT * FROM product WHERE name = #{name}")
+    List<Product> findProductByName(@Param("name") String name);
+
     @Select("INSERT INTO product(name, price, description, user_id) " +
             "VALUES (#{name}, #{price}, #{description}, #{userId}) " +
             "RETURNING id, name, price, description, created_at, updated_at, user_id")
