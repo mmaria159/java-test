@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.data.domain.Sort.Direction.ASC;
@@ -31,7 +32,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Product createProduct(@RequestBody ProductDto productDto) {
+    public Product createProduct(@Valid @RequestBody ProductDto productDto) {
         Product product = productDto.toProduct();
         return productService.createProduct(product);
     }
@@ -54,7 +55,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public void updateProductById(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    public void updateProductById(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {
         Product product = productDto.toProduct();
         product.setId(id);
         productService.updateProductById(product);

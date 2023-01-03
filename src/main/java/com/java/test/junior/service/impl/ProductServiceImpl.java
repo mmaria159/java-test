@@ -2,11 +2,12 @@
  * Copyright (c) 2013-2022 Global Database Ltd, All rights reserved.
  */
 
-package com.java.test.junior.service;
+package com.java.test.junior.service.impl;
 
 import com.java.test.junior.exception.ProductNotExistsException;
 import com.java.test.junior.mapper.ProductMapper;
 import com.java.test.junior.model.Product;
+import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
