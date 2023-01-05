@@ -3,12 +3,12 @@ package com.java.test.junior.config;
 import com.java.test.junior.mapper.ProductMapper;
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.apache.ibatis.session.Configuration;
 
 import javax.sql.DataSource;
 
@@ -31,7 +31,7 @@ public class MyBatisConfig {
 
     @Bean
     public Configuration configuration() {
-        Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource());
+        Environment environment = new Environment("Development", new SpringManagedTransactionFactory(), dataSource());
 
         Configuration configuration = new Configuration(environment);
         configuration.setMapUnderscoreToCamelCase(true);

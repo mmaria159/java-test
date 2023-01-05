@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.CREATED;
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
