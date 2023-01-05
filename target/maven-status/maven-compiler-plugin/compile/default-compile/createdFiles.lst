@@ -12,9 +12,9 @@ com\java\test\junior\dto\ProductDto.class
 com\java\test\junior\config\BasicAuthSecurityConfig.class
 com\java\test\junior\service\impl\UserDetailsServiceImpl.class
 com\java\test\junior\model\Product.class
+com\java\test\junior\config\SwaggerConfig.class
 com\java\test\junior\model\User.class
 com\java\test\junior\mapper\ProductMapper.class
-com\java\test\junior\config\Profiles.class
 com\java\test\junior\service\UserService.class
 com\java\test\junior\service\ProductLikesService.class
 com\java\test\junior\MarketplaceApplication.class

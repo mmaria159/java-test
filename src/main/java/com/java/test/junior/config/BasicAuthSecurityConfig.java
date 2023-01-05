@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+
 
 @Configuration
 @EnableWebSecurity
@@ -30,8 +33,9 @@ public class BasicAuthSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/products/**").permitAll()
-                .antMatchers("/users/**").permitAll()
+                .antMatchers("/users/register").permitAll()
+                .antMatchers(POST).authenticated()
+                .antMatchers(PUT).authenticated()
                 .and()
                 .httpBasic()
                 .and().authorizeRequests().anyRequest().permitAll()

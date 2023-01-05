@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class UserDto {
+public class CreateUserRequest {
     @NotBlank(message = "Username is mandatory")
     private String username;
 

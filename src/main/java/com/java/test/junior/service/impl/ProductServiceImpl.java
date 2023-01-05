@@ -5,16 +5,20 @@
 package com.java.test.junior.service.impl;
 
 import com.java.test.junior.exception.ProductNotExistsException;
+import com.java.test.junior.exception.UserNotExistsException;
 import com.java.test.junior.mapper.ProductLikesMapper;
 import com.java.test.junior.mapper.ProductMapper;
+import com.java.test.junior.mapper.UserMapper;
 import com.java.test.junior.model.Product;
 import com.java.test.junior.model.ProductLikes;
+import com.java.test.junior.model.User;
 import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,13 +37,14 @@ public class ProductServiceImpl implements ProductService {
      * @return the product created from the database
      */
     private final ProductMapper productMapper;
+    private final UserMapper userMapper;
     private final ProductLikesMapper productLikesMapper;
 
     @Override
-//    @Transactional
+    @Transactional
     public Product createProduct(Product product) {
         Product savedProduct = productMapper.save(product);
-        productLikesMapper.save(new ProductLikes(savedProduct.getId(),savedProduct.getUserId()));
+        productLikesMapper.save(new ProductLikes(savedProduct.getId(), savedProduct.getUserId()));
         return savedProduct;
     }
 
@@ -64,6 +69,11 @@ public class ProductServiceImpl implements ProductService {
 
         if (isNull(existingProduct)) {
             throw new ProductNotExistsException("Unknown product with id: " + product.getId());
+        }
+
+        User user = userMapper.findById(product.getUserId());
+        if (isNull(user)) {
+            throw new UserNotExistsException("Unknown user with id: " + product.getUserId());
         }
 
         productMapper.update(product);
