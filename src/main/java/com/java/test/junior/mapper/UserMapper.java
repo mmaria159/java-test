@@ -10,6 +10,9 @@ import static org.apache.ibatis.annotations.Options.FlushCachePolicy.TRUE;
 @Mapper
 public interface UserMapper {
 
+    @Select("SELECT * FROM postgres.public.user WHERE id = #{id}")
+    User findById(Long id);
+
     @Select("INSERT INTO postgres.public.user (username, email, password) " +
             "VALUES (#{username}, #{email}, #{password}) " +
             "RETURNING id, username, email, password")

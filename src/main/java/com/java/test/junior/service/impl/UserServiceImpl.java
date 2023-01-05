@@ -15,4 +15,5 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         return userMapper.save(user);
     }
+
 }

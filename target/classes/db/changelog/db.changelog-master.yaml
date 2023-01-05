@@ -17,3 +17,9 @@ databaseChangeLog:
   - include:
       file: migration/V3__migrate_add_foreign_key_for_product.sql
       relativeToChangelogFile: true
+  - changeSet:
+      id: 4
+      author: java-test-junior
+  - include:
+      file: migration/V4__migrate_product_likes.sql
+      relativeToChangelogFile: true
